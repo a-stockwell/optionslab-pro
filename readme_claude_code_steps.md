@@ -217,3 +217,12 @@ v_weekly_income — both REALIZED and COMPRESSED legs appear in the correct week
 SQLite 3.51.2 confirmed — FULL OUTER JOIN in v_weekly_income is supported.
 
 Type "next" for Step 7 — Seed data SQL.
+
+## Step 7 complete. db/seed/seed_data.sql written and verified:
+
+3 accounts (MGN, ROTH, CASH) — all Schwab
+5 buckets (A, B, C, Legacy, ODTE) with correct sort order
+12 strategy definitions — all flags verified for key strategies
+Idempotent — INSERT OR IGNORE means re-running seed never duplicates or errors
+
+Type "next" for Step 8 — Python init_db.py module.
