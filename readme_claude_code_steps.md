@@ -226,3 +226,22 @@ Type "next" for Step 7 — Seed data SQL.
 Idempotent — INSERT OR IGNORE means re-running seed never duplicates or errors
 
 Type "next" for Step 8 — Python init_db.py module.
+
+## Step 8 complete. db/init_db.py written and all 12 checks green:
+
+| Check | Result |
+|---|---|
+| All 10 tables created | PASS |
+| All 5 views created | PASS |
+| Seed data present (12 strategies) | PASS |
+| foreign_keys = ON | PASS |
+| row_factory — column access by name | PASS |
+| init_db idempotent (no duplicates) | PASS |
+| generate_chain_id format chn_xxxxxxxx | PASS |
+| 1000 unique ids, zero collisions | PASS |
+| Alias (standard) m-spy-500-0101 | PASS |
+| Alias (equity) r-sofi-eq-0101 | PASS |
+| Alias collision guard → m-spy-500-0101-2 | PASS |
+| ValueError on missing strike for non-equity | PASS |
+
+Type "next" for Step 9 — pytest test suite (final step).
