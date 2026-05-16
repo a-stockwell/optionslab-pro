@@ -169,3 +169,33 @@ equity_positions.bucket_id = NULL — accepted (valid, means outside bucket syst
 One structural note: equity_positions moved fully into layer2_chains.sql so option_legs has a valid FK target. layer3_equity.sql now only contains equity_exits. The load order L1 → L2 → L3 is clean with no forward-declaration hacks.
 
 Type "next" for Step 5 — Triggers.
+
+## Step 5 complete. db/schema/triggers.sql written and all 8 checks green:
+
+
+
+
+| Trigger | Verified |
+
+|---|---|
+
+| trg_bucket_config_one_active_insert | Deactivates prior active row on new insert |
+
+| trg_bucket_config_one_active_update | Deactivates other rows when one is set active |
+
+| trg_option_legs_chain_match_insert | Blocks account mismatch between leg and chain |
+
+| trg_option_legs_chain_match_insert | Blocks bucket mismatch between leg and chain |
+
+| trg_share_blocks_chain_match_insert | Blocks account mismatch between share block and chain |
+
+| trg_option_legs_compression_insert | Blocks COMPRESSED on BEAR_CALL_SPREAD (allows_compression=0) |
+
+| trg_option_legs_compression_update | Same check on UPDATE of premium_status |
+
+| Positive case | COMPRESSED correctly allowed on WHEEL (allows_compression=1) |
+
+
+
+
+Type "next" for Step 6 — Views SQL.
