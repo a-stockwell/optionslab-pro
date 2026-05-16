@@ -62,20 +62,22 @@ CREATE TABLE IF NOT EXISTS share_blocks (
 );
 
 -- -----------------------------------------------------------------------------
--- equity_positions (forward declaration)
--- Defined as a stub here so option_legs can reference it via FK.
--- Full definition is in layer3_equity.sql — this CREATE IF NOT EXISTS is a no-op
--- when layer3 runs second; it only exists to satisfy the FK during layer2 load.
+-- equity_positions
+-- Defined here (before option_legs) so option_legs can hold a valid FK to it.
+-- Full business logic documented in layer3_equity.sql alongside equity_exits.
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS equity_positions (
     id                  INTEGER PRIMARY KEY AUTOINCREMENT,
     ticker              TEXT NOT NULL,
     account_id          TEXT NOT NULL REFERENCES accounts(id),
-    bucket_id           TEXT REFERENCES buckets(id),
-    shares              INTEGER NOT NULL,
-    purchase_price      INTEGER NOT NULL,
-    purchase_date       TEXT NOT NULL,
-    capital_deployed    INTEGER NOT NULL,
+    bucket_id           TEXT REFERENCES buckets(id),            -- NULL = outside bucket system
+    shares              INTEGER NOT NULL
+                        CHECK (shares > 0),
+    purchase_price      INTEGER NOT NULL                        -- in cents, e.g. 1200 = $12.00
+                        CHECK (purchase_price > 0),
+    purchase_date       TEXT NOT NULL,                          -- ISO date
+    capital_deployed    INTEGER NOT NULL                        -- in cents: purchase_price * shares
+                        CHECK (capital_deployed > 0),
     purpose             TEXT NOT NULL DEFAULT 'INCOME'
                         CHECK (purpose IN ('INCOME', 'COMPRESSION', 'HOLD')),
     status              TEXT NOT NULL DEFAULT 'OPEN'
