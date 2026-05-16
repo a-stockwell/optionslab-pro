@@ -245,3 +245,29 @@ Type "next" for Step 8 — Python init_db.py module.
 | ValueError on missing strike for non-equity | PASS |
 
 Type "next" for Step 9 — pytest test suite (final step).
+
+## Step 9 complete. The full DB layer is built. Here's the final file map:
+
+59 passed in 0.10s. Zero failures.
+
+---
+
+```PLAINTEXT
+db/
+├── __init__.py
+├── init_db.py                  generate_chain_id, generate_chain_alias, init_db, get_connection
+├── schema/
+│   ├── layer1_reference.sql    accounts, buckets, bucket_config, strategy_definitions
+│   ├── layer2_chains.sql       chains, equity_positions, option_legs, share_blocks, share_exits
+│   ├── layer3_equity.sql       equity_exits
+│   ├── triggers.sql            6 triggers (5 rules)
+│   └── views.sql               5 computed views
+└── seed/
+    └── seed_data.sql           3 accounts, 5 buckets, 12 strategies
+tests/
+├── conftest.py                 db + db_seeded fixtures
+├── test_schema.py              22 tests — tables, views, CHECK constraints, FKs
+├── test_triggers.py            13 tests — all trigger rules + positive cases
+└── test_views.py               24 tests — breakeven math, utilization, P/L, weekly income```
+
+The DB layer is complete. What's next — migration scripts from the Google Sheets export, or something else?
