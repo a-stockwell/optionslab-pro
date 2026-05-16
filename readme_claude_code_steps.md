@@ -199,3 +199,21 @@ Type "next" for Step 5 — Triggers.
 
 
 Type "next" for Step 6 — Views SQL.
+
+## Step 6 complete. db/schema/views.sql written and all 9 computation checks green:
+
+v_share_breakeven — breakeven arithmetic verified end-to-end:
+
+Original: $500.00 − $5.00 CSP = $495.00
+Current: $495.00 − $2.00 CC realized = $493.00
+Next: $493.00 − $1.50 CC open = $491.50
+
+v_bucket_utilization — deployed capital from open share blocks correctly summed
+
+v_chain_summary — open credit, realized premium, and compressed premium all isolated correctly with no double-counting
+
+v_weekly_income — both REALIZED and COMPRESSED legs appear in the correct week
+
+SQLite 3.51.2 confirmed — FULL OUTER JOIN in v_weekly_income is supported.
+
+Type "next" for Step 7 — Seed data SQL.
