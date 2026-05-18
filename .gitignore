@@ -1,0 +1,34 @@
+# Database
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Google Sheets exports (contain real trading data — never commit)
+*.csv
+*.xlsx
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Environment
+.env
+.env.*
+
+# macOS
+.DS_Store
